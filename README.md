@@ -7,11 +7,12 @@ In order to run this code, must be running `docker-compose up -d` in the [blocks
 Run all code in the browser in an incognito window. Blockstack's underlying api caches information, which makes it difficult to undo changes.
 
 + Clicking on the *Sign In with BlockStack* button in the app will take you to their website. The address will look something like 
-`https://blockstack.org/auth?authRequest=` with a long string of letters and numbers after the "=" sign. Delete the `https://blockstack.org` part of the URL and replace it with `localhost:8888`, which is the port that the docker container for their API will be running on. The whole URL will now look like `localhost:8888/auth?authRequest=*long_verification_string*`.
-+You will now be taken to a page that asks if you would like to approve the sign in. On approval, the app will be running.
+`https://blockstack.org/auth?authRequest=` with a long string of letters and numbers after the "=" sign. Delete the `https://blockstack.org` part of the URL and replace it with `localhost:8888`, which is the port that the docker container for their API will be running on. The whole URL will now look like `localhost:8888/auth?authRequest=` with the long string following.
 
-#Making Changes
-+Changes made in *Public* folder will be automatically included in the code on `localhost:5000`. Refresh the page to include them.
++ You will now be taken to a page that asks if you would like to approve the sign in. On approval, the app will be running.
+
+# Making Changes
++ Changes made in *Public* folder will be automatically included in the code on `localhost:5000`. Refresh the page to include them.
 
 
 
