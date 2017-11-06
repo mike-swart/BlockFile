@@ -1,32 +1,35 @@
 function fileSubmit() {
-  var x = document.getElementById("file")
-  var txt = "";
-  var file_reader = new FileReader;
-    if ('files' in x) {
-        if (x.files.length == 1) {
-            for (var i = 0; i < x.files.length; i++) {
-                var file = x.files[i];
-                if ('name' in file) {
-                    txt += "name: " + file.name + "\t";
-                }
-                if ('size' in file) {
-                    txt += "size: " + file.size + " bytes \n";
-                }
-                txt += "\tThe file is of type " + file.type;
-            }
-        }
-        else if (x.files.length > 1) {
-            alert("Please select only one file to encrypt");
-        } 
-    } 
-    else {
-        if (x.value == "") {
-            alert("Select a file to encrypt");
-        } else {
-            alert("File submission not supported");
-        }
+  var input = document.getElementById("file");
+  var display = document.getElementById("file_show");
+
+  if (input.files) {
+    if (input.files.length == 1) {
+      var file = input.files[0];
+      //load file
+      var encryptor = new FileReader;
+      encryptor.onloadend = function() {
+        var obj = encryptor.result;
+        blockstack.putFile("/this_file.txt", obj).then(() => {
+            blockstack.getFile("/this_file.txt").then((fileContents) => {
+            console.log("IN GETFILE");
+            console.log(fileContents);
+            //could be nice to show the file
+          })
+        })
+      }
+      //how should read
+      encryptor.readAsText(file);
     }
-    console.log(txt)
+    else {
+      alert("Please select only one file to encrypt");
+    }
+  }
+  else if (x.value == "") {
+    alert("Select a file to encrypt");
+  } 
+  else {
+    alert("File submission not supported");
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -41,15 +44,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function showProfile(profile) {
     var person = new blockstack.Person(profile)
+    console.log(person.toJSON())
     document.getElementById('heading-name').innerHTML = person.name() ? person.name() : "Unknown Person"
     if(person.avatarUrl()) {
       document.getElementById('avatar-image').setAttribute('src', person.avatarUrl())
+    }
+    if (person.address()) {
+      console.log("Address")
+      console.log(person.address())
     }
     document.getElementById('section-1').style.display = 'none'
     document.getElementById('section-2').style.display = 'block'
   }
 
   if (blockstack.isUserSignedIn()) {
+    console.log("This user's private key is " + blockstack.loadUserData().appPrivateKey);
+    console.log("This user's public key is " + blockstack.getPublicKeyFromPrivate(blockstack.loadUserData().appPrivateKey));
     var profile = blockstack.loadUserData().profile
       showProfile(profile)
   } else if (blockstack.isSignInPending()) {
