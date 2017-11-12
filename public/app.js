@@ -3,33 +3,43 @@ function fileSubmit() {
   var display = document.getElementById("file_show");
 
   if (input.files) {
-    if (input.files.length == 1) {
+    if (input.files.length === 1) {
       var file = input.files[0];
-      //load file
       var encryptor = new FileReader;
-      encryptor.onloadend = function() {
+      encryptor.onload = function() {
         var obj = encryptor.result;
-        blockstack.putFile("/this_file.txt", obj).then(() => {
-            blockstack.getFile("/this_file.txt").then((fileContents) => {
-            console.log("IN GETFILE");
-            console.log(fileContents);
-            //could be nice to show the file
-          })
-        })
-      }
-      //how should read
-      encryptor.readAsText(file);
+        getMasterFile(obj);
+      }     
+      encryptor.readAsBinaryString(file);
     }
     else {
       alert("Please select only one file to encrypt");
     }
   }
-  else if (x.value == "") {
-    alert("Select a file to encrypt");
-  } 
-  else {
-    alert("File submission not supported");
-  }
+}
+
+function getMasterFile(obj) {
+  blockstack.getFile("/file.txt").then((fileContents) => {
+    //if the file does not exist then make a new file
+    if (fileContents === null) {
+      console.log("file was null. Creating new file.")
+      blockstack.putFile("/file.txt", '{"files": []}').then(() => {});
+    }
+    var parsed = JSON.parse(fileContents);
+    var arr = [];
+    var i;
+    for (i = 0; i<parsed.files.length; i++) {
+      arr[i] = parsed.files[i];
+    }
+    arr.push(obj);
+    parsed.files = arr;
+    var str = JSON.stringify(parsed);
+    console.log(parsed);
+    /*blockstack.putFile("/file.txt", str).then(() => {
+      console.log("file written");
+    });*/
+    //console.log("Hello");
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -44,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function showProfile(profile) {
     var person = new blockstack.Person(profile)
-    console.log(person.toJSON())
+    //console.log(person.toJSON())
     document.getElementById('heading-name').innerHTML = person.name() ? person.name() : "Unknown Person"
     if(person.avatarUrl()) {
       document.getElementById('avatar-image').setAttribute('src', person.avatarUrl())

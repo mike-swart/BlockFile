@@ -7,6 +7,8 @@ In order to run this code, must be running `docker-compose up -d` in the [blocks
 ### Important Note
 Run all code in the browser in an incognito window. Blockstack's underlying api caches information, which makes it difficult to undo changes.
 
++ run npm install ngrok
+
 + run `npm run start`. This will run on localhost:5000
 
 + Clicking on the *Sign In with BlockStack* button in the app will take you to their website. The address will look something like 
@@ -44,8 +46,14 @@ Run all code in the browser in an incognito window. Blockstack's underlying api 
 
 ### Things to look into 
 
-they use cors-anywhere and gulp-connect-proxy for their proxy connection. Look into these for figuring out how to share data.
-These might just forward to localhost...
+ngrok
+--> read in all files and encrypt them into a JSON block
+--> make a server that returns this JSON object
+--> on one ending return keys, on other ending return encrypted JSON
+--> on the other side, make an https call to ngrok to parse through JSON block
+--> unencrypt the files
+
+window.crypto.getRandomValues()
 
 
 

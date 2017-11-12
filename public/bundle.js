@@ -20211,7 +20211,8 @@ var Github = function (_Service) {
     value: function getProofUrl(proof) {
       var baseUrls = this.getBaseUrls();
       for (var i = 0; i < baseUrls.length; i++) {
-        if (proof.proof_url.toLowerCase().startsWith('' + baseUrls[i] + proof.identifier)) {
+        var requiredPrefix = ('' + baseUrls[i] + proof.identifier).toLowerCase();
+        if (proof.proof_url.toLowerCase().startsWith(requiredPrefix)) {
           var raw = proof.proof_url.endsWith('/') ? 'raw' : '/raw';
           return '' + proof.proof_url + raw;
         }
@@ -81139,6 +81140,7 @@ var TYPES = {
 
     function _arrayOf (array, strict) {
       if (!NATIVE.Array(array)) return false
+      if (NATIVE.Nil(array)) return false
 
       return array.every(function (value, i) {
         try {
@@ -81169,8 +81171,8 @@ var TYPES = {
     if (propertyKeyType) propertyKeyType = compile(propertyKeyType)
 
     function _map (value, strict) {
-      if (!NATIVE.Object(value, strict)) return false
-      if (NATIVE.Nil(value, strict)) return false
+      if (!NATIVE.Object(value)) return false
+      if (NATIVE.Nil(value)) return false
 
       for (var propertyName in value) {
         try {
@@ -81272,13 +81274,17 @@ var TYPES = {
     var types = [].slice.call(arguments).map(compile)
 
     function _tuple (values, strict) {
+      if (NATIVE.Nil(values)) return false
+      if (NATIVE.Nil(values.length)) return false
+      if (strict && (values.length !== types.length)) return false
+
       return types.every(function (type, i) {
         try {
           return typeforce(type, values[i], strict)
         } catch (e) {
           throw tfSubError(e, i)
         }
-      }) && (!strict || values.length === arguments.length)
+      })
     }
     _tuple.toJSON = function () { return '(' + types.map(tfJSON).join(', ') + ')' }
 
