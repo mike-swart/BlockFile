@@ -1,10 +1,15 @@
 In order to run this code, must be running `docker-compose up -d` in the [blockstack-todos repo](https://github.com/blockstack/blockstack-todos).
++ `blockstack_integration_test_api_password` is the password to use in advanced settings.
++ Note: It is not necessary to buy a username for this application to run. To save time you can skip this setp in the *blockstack-todos* setup
 
 # Getting Started and Running in Browser
-+ run `npm run start`. This will run on localhost:5000
 
 ### Important Note
 Run all code in the browser in an incognito window. Blockstack's underlying api caches information, which makes it difficult to undo changes.
+
++ run npm install ngrok
+
++ run `npm run start`. This will run on localhost:5000
 
 + Clicking on the *Sign In with BlockStack* button in the app will take you to their website. The address will look something like 
 `https://blockstack.org/auth?authRequest=` with a long string of letters and numbers after the "=" sign. Delete the `https://blockstack.org` part of the URL and replace it with `localhost:8888`, which is the port that the docker container for their API will be running on. The whole URL will now look like `localhost:8888/auth?authRequest=` with the long string following.
@@ -14,6 +19,41 @@ Run all code in the browser in an incognito window. Blockstack's underlying api 
 # Making Changes
 + Changes made in *Public* folder will be automatically included in the code on `localhost:5000`. Refresh the page to include them.
 
+
+# Git
+
+### To Add To Master
+
++ `git add .`
+
++ `git commit -m <commit_message>`
+
++ `git push -u origin master`
+
+### To Add To Branch
+
++ `git checkout -b <branch_name>`
+
++ `git add .`
+
++ `git commit -m <commit_message>`
+
++ `git push -u origin <branch_name>`
+
++ merge and squash within the branch on the website
+
+
+
+### Things to look into 
+
+ngrok
+--> read in all files and encrypt them into a JSON block
+--> make a server that returns this JSON object
+--> on one ending return keys, on other ending return encrypted JSON
+--> on the other side, make an https call to ngrok to parse through JSON block
+--> unencrypt the files
+
+window.crypto.getRandomValues()
 
 
 
