@@ -1,16 +1,38 @@
 var port = 4567;
+var file;
 
-//can set port via command line
+//get file name
 if (process.argv.length == 3) {
-  port = process.argv[2];
+   file = process.argv[2];
 }
-var http = require('http');
-//create a server object:
-console.log("Running on port " + port);
-http.createServer(function (req, res) {
-  res.write("HELLLO"); //write a response to the client
-  res.end(); 
-}).listen(port); //the server object listens on the specified port
+
+const express = require('express')  
+const opn = require('opn')
+
+const app = express()  
+
+function allowCrossDomain(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  next()
+}
+
+app.use(allowCrossDomain)
+app.use('/', (request, response) => {
+  var fs = require('fs')
+  fs.readFile(file, 'utf8', function(err, data) {  
+    	if (err) throw err;
+    	response.send(data);
+	});
+})
+app.listen(port, (err) => {  
+  if (err) {
+    return console.log('something bad happened', err)
+  }
+  console.log(`server is listening on ${port}`)
+  opn('http://localhost:' + port)
+})
 
 var ngrok = require('ngrok');
   ngrok.connect(port, function (err, url) {
