@@ -24,6 +24,12 @@
   },
   "dependencies": {
     "blockstack": "^0.11.2",
-    "ngrok": "^2.2.23"
+    "browser-env": "^3.2.2",
+    "browser-run": "^4.0.4",
+    "electron": "^1.7.9",
+    "jsontokens": "^0.7.6",
+    "ngrok": "^2.2.23",
+    "node-localstorage": "^1.3.0",
+    "window": "^4.2.2"
   }
 }

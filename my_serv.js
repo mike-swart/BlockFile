@@ -9,8 +9,32 @@ if (process.argv.length == 3) {
 const express = require('express')  
 const opn = require('opn')
 
-const app = express()  
+const app = express()
 
+const blockstack = require('blockstack')
+
+//const document = {"document_mode": false};
+//document.document_mode = false;
+require('browser-env')(['window']);
+global.navigator = {
+  userAgent: 'node.js'
+};
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
+
+
+var run = require('browser-run');
+var browser = run();
+browser.pipe(process.stdout);
+browser.end('console.log(location); window.close()');
+
+
+console.log("\n\n----------AuthReqset start----------------");
+blockstack.makeAuthRequest();
+console.log("is signed in " + blockstack.isUserSignedIn());
+console.log("----------AuthReqset end----------------\n\n");
 function allowCrossDomain(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
@@ -34,7 +58,7 @@ app.listen(port, (err) => {
   opn('http://localhost:' + port)
 })
 
-var ngrok = require('ngrok');
-  ngrok.connect(port, function (err, url) {
-    console.log("Public URL: " + url);
-  });
+/*var ngrok = require('ngrok');
+ngrok.connect(port, function (err, url) {
+  console.log("Public URL: " + url);
+});*/

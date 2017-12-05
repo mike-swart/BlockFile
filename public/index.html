@@ -19,7 +19,19 @@
         </p>
       </div>
       <div class="hide" id="section-2">
-        <div class="profile">
+        <div class="topbar">
+          <div class="header-buttons">
+            <button class="button1" type="button" onclick="showElement('home')">Home</button>
+          </div>
+          <div class="header-buttons">
+            <button class="button1" type="button" onclick="showElement('addition')">Add a Record</button>
+          </div>
+          <div class="header-buttons">
+            <button class="button1" type="button" onclick="showElement('share')">Share a Record</button>
+          </div>
+          <div class="header-buttons">
+            <button class="button1" type="button" onclick="showElement('show')">Display Records</button>
+          </div>
           <div class="dropdown">
             <img src="https://s3.amazonaws.com/onename/avatar-placeholder.png" class="img-rounded profile-image" id="avatar-image"></img>
             <div class="dropdown-content">
@@ -38,28 +50,52 @@
                 </tr>
                 <tr style="float:center;">
                   <td>Logout</td>
-                  <td><a href="#" class="btn btn-primary btn-lg" id="signout-button" style="width:100%;">Logout</a></td>
+                  <td>
+                    <button class="button1" id="signout-button" style="width:100%;">Logout</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>&nbsp</td>
                 </tr>
               </table>
             </div>
           </div>
         </div>
-        <div>
-            <div>File Addition</div>
+        <div id="home">
+          <div>&nbsp</div>
+          <h1>Background</h1>
+          <p>Add in a bunch of information on the website and its design</p>
+          <p>It just has to be plaintext so should not take that long</p>
+          <a href="/#add" class="btn btn-primary" id="addition-button" style="width:100%;">Add a record</a>
+          <a href="#share" class="btn btn-primary btn-lg" id="share-button" style="width:100%;">Share your records</a>
+          <a href="#show" class="btn btn-primary btn-lg" id="show-button" style="width:100%;">Show Records</a>
+        </div>
+        <div id="addition">
+          <div>
+            <div>&nbsp</div>
+            <h1>Add a Record</h1>
+            <div>From file</div>
             <input type="file" name="file-selector" id="file" onchange="fileSubmit()"></input>
-            <div id="file_show"><div>
+            <div id="file_show"></div>
+            <div id="download">
+              <div>Recieve Shared File</div>
+              <form>
+                <input style="color:#000000;" type="text" name="url_addr" id="url_addr" placeholder="Insert URL here"></input>
+                <button class="button1" onclick="getFileFromURL()">Get From URL</button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div style="height:100px;"></div>
-        <div>
-          <div>File Shared</div>
-          <a href="#" class="btn btn-primary" id="get-full-file">Get File</a>
+        <div id="share">
+          <div>&nbsp</div>
+          <div>
+            <div>File Shared</div>
+            <button href="#" class="button1" id="get-full-file">Get File</button>
+          </div>
         </div>
-        <div>
-          <div>Recieve Shared File</div>
-          <form>
-            Download From URL <input style="color:#000000;" type="text" name="url_addr" id="url_addr"><br>
-            <input type="button" onclick="getFileFromURL()" value="Submit">
-          </form>
+        <div id="show">
+          <div>&nbsp</div>
+          <div>Show Records</div>
         </div>
       </div>
     </div>
