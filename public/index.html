@@ -4,7 +4,9 @@
   <title>Hello, Blockstack!</title>
   <link rel="stylesheet" href="bootstrap.min.css" />
   <link rel="stylesheet" href="app.css" />
+  <script src="https://kjur.github.io/jsrsasign/jsrsasign-all-min.js"></script>
   <script src="bundle.js"></script>
+  <script src="encryption.js"></script>
   <script src="app.js"></script>
 </head>
 <body>
@@ -25,12 +27,6 @@
           </div>
           <div class="header-buttons">
             <button class="button1" type="button" onclick="showElement('addition')">Add a Record</button>
-          </div>
-          <div class="header-buttons">
-            <button class="button1" type="button" onclick="showElement('share')">Share a Record</button>
-          </div>
-          <div class="header-buttons">
-            <button class="button1" type="button" onclick="showElement('show')">Display Records</button>
           </div>
           <div class="dropdown">
             <img src="https://s3.amazonaws.com/onename/avatar-placeholder.png" class="img-rounded profile-image" id="avatar-image"></img>
@@ -63,39 +59,50 @@
         </div>
         <div id="home">
           <div>&nbsp</div>
-          <h1>Background</h1>
-          <p>Add in a bunch of information on the website and its design</p>
-          <p>It just has to be plaintext so should not take that long</p>
-          <a href="/#add" class="btn btn-primary" id="addition-button" style="width:100%;">Add a record</a>
-          <a href="#share" class="btn btn-primary btn-lg" id="share-button" style="width:100%;">Share your records</a>
-          <a href="#show" class="btn btn-primary btn-lg" id="show-button" style="width:100%;">Show Records</a>
+          <h1>Records</h1>
+          <button href="#" class="button1" id="get-full-file">Get All Records</button>
+          <div>&nbsp</div>
+          <table id="record-display" class="d-table"></table>
         </div>
         <div id="addition">
           <div>
             <div>&nbsp</div>
-            <h1>Add a Record</h1>
-            <div>From file</div>
-            <input type="file" name="file-selector" id="file" onchange="fileSubmit()"></input>
-            <div id="file_show"></div>
-            <div id="download">
-              <div>Recieve Shared File</div>
+            <h1>Add an Existing Record</h1>
+            <div style="font-size:75%">Note: These assume that the file contents are JWT text and that it is a singular record. If the record was created below then this will happen automatically</div>
+            <table class="d-table">
+              <tr>
+                <th>Get From a File</th>
+                <th>Get From a Server</th>
+              </tr>
+              <tr>
+                <td>
+                  <input type="file" name="file-selector" id="file" onchange="fileSubmit()"></input>
+                  <div id="file_show"></div>
+                </td>
+                <td>
+                  <div id="download">
+                    <form>
+                      <input style="color:#000000;" type="text" name="url_addr" id="url_addr" placeholder="Insert URL here"></input>
+                      <button class="button1" onclick="getFileFromURL()">Get From URL</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div style="padding-top:20px;"></div>
+            <h1>Create a New Record</h1>
+            <div>
               <form>
-                <input style="color:#000000;" type="text" name="url_addr" id="url_addr" placeholder="Insert URL here"></input>
-                <button class="button1" onclick="getFileFromURL()">Get From URL</button>
-              </form>
+                <div style="padding-bottom:5px;">Record Name &nbsp
+                  <input style="color:#000000;" type="text" size="80%" name="new_record_name" id="new_record_name" placeholder="Name your Record"></input>
+                </div>
+                <div style="padding-bottom:5px;">Record Info &nbsp &nbsp &nbsp
+                  <input style="color:#000000;" type="text" size="80%" name="new_record_info" id="new_record_info" placeholder="Enter Information Here"></input>
+                </div>
+                <button class="button1" id="new_record_button" onclick="makeNewRecord()">Create</button>
+              </form> 
             </div>
           </div>
-        </div>
-        <div id="share">
-          <div>&nbsp</div>
-          <div>
-            <div>File Shared</div>
-            <button href="#" class="button1" id="get-full-file">Get File</button>
-          </div>
-        </div>
-        <div id="show">
-          <div>&nbsp</div>
-          <div>Show Records</div>
         </div>
       </div>
     </div>

@@ -11470,21 +11470,27 @@ require('./convert')
 module.exports = BigInteger
 },{"./bigi":65,"./convert":66}],68:[function(require,module,exports){
 module.exports={
-  "_from": "bigi@^1.4.2",
+  "_args": [
+    [
+      "bigi@1.4.2",
+      "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile"
+    ]
+  ],
+  "_from": "bigi@1.4.2",
   "_id": "bigi@1.4.2",
   "_inBundle": false,
   "_integrity": "sha1-nGZalfiLiwj8Bc/XMfVhhZ1yWCU=",
   "_location": "/bigi",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "bigi@^1.4.2",
+    "raw": "bigi@1.4.2",
     "name": "bigi",
     "escapedName": "bigi",
-    "rawSpec": "^1.4.2",
+    "rawSpec": "1.4.2",
     "saveSpec": null,
-    "fetchSpec": "^1.4.2"
+    "fetchSpec": "1.4.2"
   },
   "_requiredBy": [
     "/bitcoinjs-lib",
@@ -11492,15 +11498,12 @@ module.exports={
     "/ecurve"
   ],
   "_resolved": "https://registry.npmjs.org/bigi/-/bigi-1.4.2.tgz",
-  "_shasum": "9c665a95f88b8b08fc05cfd731f561859d725825",
-  "_spec": "bigi@^1.4.2",
-  "_where": "/Users/michaelswart/Desktop/BlockFile/node_modules/blockstack",
+  "_spec": "1.4.2",
+  "_where": "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile",
   "bugs": {
     "url": "https://github.com/cryptocoinjs/bigi/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {},
-  "deprecated": false,
   "description": "Big integers.",
   "devDependencies": {
     "coveralls": "^2.11.2",
@@ -30194,29 +30197,34 @@ exports.isHtml = function(str) {
 
 },{"./parse":175,"dom-serializer":208}],178:[function(require,module,exports){
 module.exports={
-  "_from": "cheerio@^0.22.0",
+  "_args": [
+    [
+      "cheerio@0.22.0",
+      "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile"
+    ]
+  ],
+  "_from": "cheerio@0.22.0",
   "_id": "cheerio@0.22.0",
   "_inBundle": false,
   "_integrity": "sha1-qbqoYKP5tZWmuBsahocxIe06Jp4=",
   "_location": "/cheerio",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "cheerio@^0.22.0",
+    "raw": "cheerio@0.22.0",
     "name": "cheerio",
     "escapedName": "cheerio",
-    "rawSpec": "^0.22.0",
+    "rawSpec": "0.22.0",
     "saveSpec": null,
-    "fetchSpec": "^0.22.0"
+    "fetchSpec": "0.22.0"
   },
   "_requiredBy": [
     "/blockstack"
   ],
   "_resolved": "https://registry.npmjs.org/cheerio/-/cheerio-0.22.0.tgz",
-  "_shasum": "a9baa860a3f9b595a6b81b1a86873121ed3a269e",
-  "_spec": "cheerio@^0.22.0",
-  "_where": "/Users/michaelswart/Desktop/BlockFile/node_modules/blockstack",
+  "_spec": "0.22.0",
+  "_where": "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile",
   "author": {
     "name": "Matt Mueller",
     "email": "mattmuelle@gmail.com",
@@ -30225,7 +30233,6 @@ module.exports={
   "bugs": {
     "url": "https://github.com/cheeriojs/cheerio/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "css-select": "~1.2.0",
     "dom-serializer": "~0.1.0",
@@ -30244,7 +30251,6 @@ module.exports={
     "lodash.reject": "^4.4.0",
     "lodash.some": "^4.4.0"
   },
-  "deprecated": false,
   "description": "Tiny, fast, and elegant implementation of core jQuery designed specifically for the server",
   "devDependencies": {
     "benchmark": "^2.1.0",
@@ -39114,21 +39120,27 @@ utils.intFromLE = intFromLE;
 
 },{"bn.js":129,"minimalistic-assert":343,"minimalistic-crypto-utils":344}],241:[function(require,module,exports){
 module.exports={
-  "_from": "elliptic@^6.4.0",
+  "_args": [
+    [
+      "elliptic@6.4.0",
+      "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile"
+    ]
+  ],
+  "_from": "elliptic@6.4.0",
   "_id": "elliptic@6.4.0",
   "_inBundle": false,
   "_integrity": "sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=",
   "_location": "/elliptic",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "elliptic@^6.4.0",
+    "raw": "elliptic@6.4.0",
     "name": "elliptic",
     "escapedName": "elliptic",
-    "rawSpec": "^6.4.0",
+    "rawSpec": "6.4.0",
     "saveSpec": null,
-    "fetchSpec": "^6.4.0"
+    "fetchSpec": "6.4.0"
   },
   "_requiredBy": [
     "/blockstack",
@@ -39138,9 +39150,8 @@ module.exports={
     "/jsontokens"
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz",
-  "_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
-  "_spec": "elliptic@^6.4.0",
-  "_where": "/Users/michaelswart/Desktop/BlockFile/node_modules/blockstack",
+  "_spec": "6.4.0",
+  "_where": "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -39148,7 +39159,6 @@ module.exports={
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "bn.js": "^4.4.0",
     "brorand": "^1.0.1",
@@ -39158,7 +39168,6 @@ module.exports={
     "minimalistic-assert": "^1.0.0",
     "minimalistic-crypto-utils": "^1.0.0"
   },
-  "deprecated": false,
   "description": "EC cryptography",
   "devDependencies": {
     "brfs": "^1.4.3",
@@ -53447,29 +53456,34 @@ utils.intFromLE = intFromLE;
 
 },{"bn.js":310}],327:[function(require,module,exports){
 module.exports={
-  "_from": "elliptic@^5.1.0",
+  "_args": [
+    [
+      "elliptic@5.2.1",
+      "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile"
+    ]
+  ],
+  "_from": "elliptic@5.2.1",
   "_id": "elliptic@5.2.1",
   "_inBundle": false,
   "_integrity": "sha1-+ilLZWPG3bybo9yFlGh66ECFjxA=",
   "_location": "/key-encoder/elliptic",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "elliptic@^5.1.0",
+    "raw": "elliptic@5.2.1",
     "name": "elliptic",
     "escapedName": "elliptic",
-    "rawSpec": "^5.1.0",
+    "rawSpec": "5.2.1",
     "saveSpec": null,
-    "fetchSpec": "^5.1.0"
+    "fetchSpec": "5.2.1"
   },
   "_requiredBy": [
     "/key-encoder"
   ],
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-5.2.1.tgz",
-  "_shasum": "fa294b6563c6ddbc9ba3dc8594687ae840858f10",
-  "_spec": "elliptic@^5.1.0",
-  "_where": "/Users/michaelswart/Desktop/BlockFile/node_modules/key-encoder",
+  "_spec": "5.2.1",
+  "_where": "/Users/michaelswart/Desktop/Fall 2017/COS IWS 06/BlockFile",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -53477,14 +53491,12 @@ module.exports={
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "bn.js": "^3.1.1",
     "brorand": "^1.0.1",
     "hash.js": "^1.0.0",
     "inherits": "^2.0.1"
   },
-  "deprecated": false,
   "description": "EC cryptography",
   "devDependencies": {
     "browserify": "^3.44.2",

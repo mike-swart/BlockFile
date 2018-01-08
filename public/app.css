@@ -1,4 +1,10 @@
 /* Globals */
+h1{
+	padding-bottom: 0px;
+	padding-top: 30px;
+	color: #000000;
+	text-shadow: 1px 2px #ffffff;
+}
 a,a:focus,a:hover{color:#000000;}
 html,body{
 	height:100%;
@@ -14,6 +20,27 @@ body{
 .landing-heading{
 	font-family:'Source Code Pro',monospace;
 	font-weight:400;
+}
+
+.d-table{
+	width: 100%;
+	border: 1px solid black;
+	text-align: center;
+}
+
+th{
+	border: 1px solid black;
+	text-align: center;
+	font-size: 120%;
+}
+tr {
+	border: 1px solid #C0C0C0;
+	border-left: 1px #C0C0C0;
+	border-right: 1px #C0C0C0;
+	font-size: 85%;
+}
+tr:hover {
+	background-color: #66A5A0;
 }
 
 .topbar {
