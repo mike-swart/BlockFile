@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="bootstrap.min.css" />
   <link rel="stylesheet" href="app.css" />
   <script src="https://kjur.github.io/jsrsasign/jsrsasign-all-min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="bundle.js"></script>
   <script src="encryption.js"></script>
   <script src="app.js"></script>
@@ -63,6 +64,8 @@
           <button href="#" class="button1" id="get-full-file">Get All Records</button>
           <div>&nbsp</div>
           <table id="record-display" class="d-table"></table>
+          <div>&nbsp</div>
+          <button href="#" class="button1" style="color:#FF0000" onClick="removeAllRecords()">Remove All Records</button>
         </div>
         <div id="addition">
           <div>
