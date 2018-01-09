@@ -38,12 +38,14 @@
                   <td style="text-align:right;" id="user-name">not set</td>
                 </tr>
                 <tr>
-                  <td>Username:</td>
+                  <td style="text-align:left;">username:</td>
                   <td style="text-align:right;" id="username">not set</td>
                 </tr>
-                <tr>
-                  <td>Public Key:</td>
-                  <td style="text-align:right;"><p style="word-wrap:break-text;"id="public-key">not set<p></td>
+                <tr style="float:center;">
+                  <td>Reset user info</td>
+                  <td>
+                    <button class="button1" onclick="getUserInfo(true)" style="width:100%;">Reset username and private key</a>
+                  </td>
                 </tr>
                 <tr style="float:center;">
                   <td>Logout</td>
@@ -101,6 +103,9 @@
                 </div>
                 <div style="padding-bottom:5px;">Record Info &nbsp &nbsp &nbsp
                   <input style="color:#000000;" type="text" size="80%" name="new_record_info" id="new_record_info" placeholder="Enter Information Here"></input>
+                </div>
+                <div style="padding-bottom:5px;">Recipient &nbsp &nbsp &nbsp &nbsp &nbsp
+                  <input style="color:#000000;" type="text" size="80%" name="new_record_recipient" id="new_record_recipient" placeholder="Enter the id of the person that this record is for"></input>
                 </div>
                 <button class="button1" id="new_record_button" onclick="makeNewRecord()">Create</button>
               </form> 

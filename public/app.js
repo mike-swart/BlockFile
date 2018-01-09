@@ -1,8 +1,4 @@
 const UNIVERSAL_RECORD_KEEPING_FILE_NAME = "/records.json"
-var time = 0;
-var username = "";
-var privateKey = "e86b1270d16542e83585ad80fb018fa48145e3c9e7f48fceb4ffda775355205b"
-var publicKey = "03164b68e9b7fcbc67bb13a6ecd8058e5691f7433db7d068bd61c490eec9817684"
 
 /*this is the file submission button*/
 function fileSubmit() {
@@ -31,8 +27,7 @@ function getFileFromURL() {
   var input = document.getElementById("url_addr").value;
   var xhr = new XMLHttpRequest();
   xhr.onloadend = function() {
-    var responseText = xhr.responseText;
-    console.log(responseText);
+    addFileToMaster(xhr.responseText);
   }
   if ("withCredentials" in xhr) {
     xhr.open("GET", input, true);
@@ -41,7 +36,6 @@ function getFileFromURL() {
     xhr = new XDomainRequest();
     xhr.open("GET", input);
   }
-  console.log(xhr);
   xhr.send();
   /*need to actually add the record*/
 }
@@ -69,11 +63,9 @@ function addFileToMaster(jwt_text) {
 
 //insert all records as an html table
 function getAllRecords() {
-  getPublicKeyFromUsername("mfreed.id");
   blockstack.getFile(UNIVERSAL_RECORD_KEEPING_FILE_NAME).then((fileContents) => {
     var parsed;
     if (fileContents === null) {
-      console.log("no file contents");
       document.getElementById('record-display').innerHTML = '<tr><td>No files</td></tr>';
       return
     }
@@ -81,7 +73,7 @@ function getAllRecords() {
       parsed = JSON.parse(fileContents);
     }
     //add in headers
-    var files = '<tr><th>Date Created</th><th>Record Name</th><th>Information</th><th>Get Individual Record</th><th>Is Verified</th><th>Creator ID</th><th>Remove this Record</th></tr>';
+    var files = '<tr><th>Date Created</th><th>Record Name</th><th>Information</th><th>Get Individual Record</th><th>Is Verified</th><th>Get Creator Info</th><th>Remove this Record</th></tr>';
     if (parsed.files.length == 0) {
       files += '<tr><td>No Files Uploaded Yet</td></tr>'
     }
@@ -90,11 +82,11 @@ function getAllRecords() {
       var temp = getValuesFromJWT(parsed.files[i]);
       files += '<tr><td>' + temp["date_added"] + '</td><td>' + temp["name"] + '</td><td>' + temp["file"] + '</td>'
       files += '<td><button class="button1" onclick="getIndividualRecord(' + i + ')">Get Record</button></td>'
-      if (verifyJWT(parsed.files[i]))
+      if (verifyJWT(temp))
         files += '<td style="color:#00FF00">&#10003</td>'
       else
         files += '<td style="color:#FF0000">X</td>'
-      files += '<td>' + temp["iss"] + '</td>'
+      files += '<td><button class="button1" onclick="getProfileInfoFromUsername(\'' + temp["iss"] + '\')">' + temp["iss"] + '</button></td>'
       files += '<td><button class="button1" style="color:#FF0000" onclick="removeIndividualRecord(' + i + ')">Remove</button></td>'
       files += '</tr>';
     }
@@ -106,14 +98,14 @@ function getAllRecords() {
 function makeNewRecord() {
   var new_name = document.getElementById("new_record_name").value;
   var new_info = document.getElementById("new_record_info").value;
+  var new_recipient = document.getElementById("new_record_recipient").value
   var date = new Date();
   var date_string = date.getHours() + ":" + date.getMinutes() + " " + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear();
-  var obj_arr = {"name":new_name, "date_added": date_string, "file": new_info};
-  var username = blockstack.loadUserData().username;
-  if (!username) {
-    username = prompt("We cannot find your blockstack id. Please enter it here", "sample.id");
+  var obj_arr = {"name":new_name, "date_added": date_string, "for" : new_recipient, "file": new_info};
+  if (!username || !private_key || username == "" || private_key == "") {
+    getUserInfo(isReset);
   }
-  var jwt_text = signJWT(obj_arr, username, privateKey);
+  var jwt_text = signJWT(obj_arr, username, private_key);
   addFileToMaster(jwt_text);
 }
 
@@ -177,6 +169,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     event.preventDefault()
     blockstack.signUserOut(window.location.href)
   })
+  document.getElementById('new_record_button').addEventListener('click', function(event) {
+    event.preventDefault()
+  })
   document.getElementById('get-full-file').addEventListener('click', function(event) {
     event.preventDefault();
     blockstack.getFile(UNIVERSAL_RECORD_KEEPING_FILE_NAME).then((fileContents) => {
@@ -198,19 +193,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     })
   })
 
-  /*taken from stack overflow because the other libraries were for NODE*/
-  function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
-  }
-
   function showProfile(profile) {
+    getUserInfo(false);
     var person = new blockstack.Person(profile.profile)
     // set the dropdown meny elements
     document.getElementById('user-name').innerHTML = person.name() ? person.name() : "not set";
-    document.getElementById('username').innerHTML = profile.username ? profile.username : "not set";
-    document.getElementById('public-key').innerHTML = blockstack.getPublicKeyFromPrivate(profile.appPrivateKey);
     if(person.avatarUrl()) {
       document.getElementById('avatar-image').setAttribute('src', person.avatarUrl());
     }
@@ -231,7 +218,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   blockstack.getFile(UNIVERSAL_RECORD_KEEPING_FILE_NAME).then((fileContents) => {
     //if the file does not exist then make a new file
-    //fileContents=null; //this will reset the file record if uncommented
     if (fileContents === null) {
       blockstack.putFile(UNIVERSAL_RECORD_KEEPING_FILE_NAME, '{"files": []}').then(() => {
         getAllRecords();
